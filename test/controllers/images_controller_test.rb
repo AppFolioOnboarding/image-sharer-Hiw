@@ -7,6 +7,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     @image_url = 'https://www.example.com/image1.jpg'
     @invalid_url = 'test'
     @text_url = 'google.com'
+    @tags = %w[foo bar thisisatag]
   end
 
   test 'should get new' do
@@ -27,6 +28,25 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     get image_url @image
     assert_response :success
+
+    assert_select 'img', count: 1
+    assert_select 'img' do |elements|
+      assert_equal @image_url, elements[0].attr('src')
+    end
+  end
+
+  test 'should show image tags' do
+    @image = Image.create!(url: @image_url, tag_list: @tags.join(','))
+
+    get image_url @image
+    assert_response :success
+
+    assert_select 'li', count: @tags.count
+    assert_select 'li' do |elements|
+      (0..@tags.count - 1).each do |i|
+        assert_equal @tags[i], elements[i].content
+      end
+    end
   end
 
   test 'should not add invalid URL' do
@@ -55,5 +75,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
       assert_equal image2_url, elements[0].attr('src')
       assert_equal @image_url, elements[1].attr('src')
     end
+  end
+
+  test 'should show tags on index' do
+    Image.create!(url: @image_url, tag_list: @tags.join(','))
+
+    get images_url
+
+    assert_response :success
+    assert_select 'p.index-image-tags', count: 1, text: @tags.join(', ')
   end
 end
