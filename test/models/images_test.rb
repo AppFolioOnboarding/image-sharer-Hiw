@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  setup do 
-    @image_url = "https://www.example.com/image1.jpg"
-    @invalid_url = "test"
-    @text_url = "google.com"
+  setup do
+    @image_url = 'https://www.example.com/image1.jpg'
+    @invalid_url = 'test'
+    @text_url = 'google.com'
   end
 
   test 'valid url' do

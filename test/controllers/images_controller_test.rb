@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image_url = "https://www.example.com/image1.jpg"
-    @invalid_url = "test"
-    @text_url = "google.com"
+    @image_url = 'https://www.example.com/image1.jpg'
+    @invalid_url = 'test'
+    @text_url = 'google.com'
     @image = Image.create(url: @image_url)
   end
 
