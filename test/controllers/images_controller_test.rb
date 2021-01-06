@@ -2,9 +2,10 @@ require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image_url = images(:image_url)
-    @invalid_url = images(:not_url)
-    @text_url = images(:text_url)
+    @image_url = "https://www.example.com/image1.jpg"
+    @invalid_url = "test"
+    @text_url = "google.com"
+    @image = Image.create(url: @image_url)
   end
 
   test 'should get new' do
@@ -14,26 +15,26 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create image' do
     assert_difference('Image.count') do
-      post images_url, params: { image: { url: @image_url.url } }
+      post images_url, params: { image: { url: @image.url } }
     end
 
     assert_redirected_to image_url(Image.last)
   end
 
   test 'should show image' do
-    get image_url(@image_url)
+    get image_url(@image)
     assert_response :success
   end
 
   test 'should not add invalid URL' do
     assert_no_difference('Image.count') do
-      post images_url, params: { image: { url: @invalid_url.url } }
+      post images_url, params: { image: { url: @invalid_url } }
     end
   end
 
   test 'should not add text URL' do
     assert_no_difference('Image.count') do
-      post images_url, params: { image: { url: @text_url.url } }
+      post images_url, params: { image: { url: @text_url } }
     end
   end
 end

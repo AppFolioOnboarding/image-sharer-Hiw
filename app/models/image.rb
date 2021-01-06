@@ -3,6 +3,16 @@ require 'rest-client'
 class Image < ApplicationRecord
   validate :check_url_valid
 
+  def check_url_valid
+    # get the HTTP response
+    res = RestClient.get(url)
+    check_response(res) if res
+  rescue StandardError => e
+    determine_error(e)
+  end
+
+  private
+
   def check_response(res)
     # check header OK
     if res.code != 200
@@ -22,13 +32,5 @@ class Image < ApplicationRecord
     else
       errors.add(:url, '- Oops, something went wrong!')
     end
-  end
-
-  def check_url_valid
-    # get the HTTP response
-    res = RestClient.get(url)
-    check_response(res) if res
-  rescue StandardError => e
-    determine_error(e)
   end
 end
