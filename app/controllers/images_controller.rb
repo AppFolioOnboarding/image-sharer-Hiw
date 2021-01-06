@@ -1,6 +1,11 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
 
+  # GET /images/
+  def index
+    redirect_to new_image_path
+  end
+
   # GET /images/1
   def show; end
 

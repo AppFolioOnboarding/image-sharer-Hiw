@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+image_url:
+  url: https://www.example.com/image1.jpg
+
+not_url:
+  url: test
+
+text_url:
+  url: google.com
