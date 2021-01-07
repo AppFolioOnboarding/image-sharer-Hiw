@@ -15,6 +15,10 @@ module ActiveSupport
       .to_return(status: 200, body: '', headers: {
         'Content-Type': 'image/jpg'
       })
+    WebMock.stub_request(:get, 'https://www.example.com/image2.jpg')
+      .to_return(status: 200, body: '', headers: {
+        'Content-Type': 'image/jpg'
+      })
     WebMock.stub_request(:get, 'google.com')
       .to_return(status: 200, body: '', headers: {
         'Content-Type': 'text/html'
