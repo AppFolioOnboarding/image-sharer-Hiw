@@ -1,0 +1,11 @@
+<h1><%= @tag %></h1>
+<% if @all_images.count > 0 then %>
+  <% @all_images.each do |image| %>
+    <img src='<%= image.url %>'/>
+    <br /> <br />
+  <% end %>
+<% else %>
+  <h4>No Images found :(</h4>
+<% end %>
+
+<%= link_to 'Index', images_path %>
