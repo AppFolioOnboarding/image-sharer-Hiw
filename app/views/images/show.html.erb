@@ -1,8 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Url:</strong>
+  <strong>Image:</strong>
   <img src='<%= @image.url %>' />
+  <p>
+    <strong>Tags:</strong>
+    <ul>
+      <% @image.tag_list.each do |tag| %>
+        <li><%= tag %></li>
+      <% end %>
+    </ul>
+  </p>
 
   <br />
   <%= link_to 'Back', new_image_path %>

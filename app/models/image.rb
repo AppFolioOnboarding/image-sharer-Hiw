@@ -2,6 +2,7 @@ require 'rest-client'
 
 class Image < ApplicationRecord
   validate :check_url_valid
+  acts_as_taggable_on :tags
 
   def check_url_valid
     # get the HTTP response
