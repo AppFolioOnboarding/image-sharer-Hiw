@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :images, only: %w[create new show index]
+  resources :images, only: %w[create new show index destroy]
 
   get 'images/tags/:tag', to: 'images#tags'
 
