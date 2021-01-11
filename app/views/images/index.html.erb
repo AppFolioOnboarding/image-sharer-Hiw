@@ -1,6 +1,12 @@
 <% @all_images.each do |image| %>
   <img src='<%= image.url %>'/>
-  <p class='index-image-tags'><%= image.tag_list %></p>
+  <p>
+    <% image.tag_list.each_with_index do |tag, i| %>
+      <span>
+        <%= link_to tag, "/images/tags/#{tag}", class:"index-image-tags" %><%= i < image.tag_list.count - 1 ? ", " : "" %>
+      </span>
+    <% end %>
+  </p>
   <br />
 <% end %>
 <%= link_to 'Add New', new_image_path %>

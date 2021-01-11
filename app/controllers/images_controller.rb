@@ -24,6 +24,12 @@ class ImagesController < ApplicationController
     end
   end
 
+  # GET /images/:tag
+  def tags
+    @tag = params[:tag]
+    @all_images = Image.tagged_with(@tag).order(created_at: :desc)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -33,6 +39,6 @@ class ImagesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def image_params
-    params.require(:image).permit(:url, :tag_list)
+    params.require(:image).permit(:url, :tag_list, :tag)
   end
 end
