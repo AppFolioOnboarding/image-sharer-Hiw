@@ -24,6 +24,24 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to image_url(Image.last)
   end
 
+  test 'should destroy image' do
+    @image = Image.create!(url: @image_url)
+
+    assert_difference 'Image.count', -1 do
+      delete image_url @image
+    end
+
+    assert_redirected_to images_path
+  end
+
+  test 'should destroy image that doesn\'t exist' do
+    assert_no_difference 'Image.count' do
+      delete image_url id: 42
+    end
+
+    assert_redirected_to images_path
+  end
+
   test 'should show image' do
     @image = Image.create!(url: @image_url)
 
