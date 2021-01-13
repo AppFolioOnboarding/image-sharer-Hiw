@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import 'whatwg-fetch';
+import fetch from 'node-fetch';
 
 const HEADERS = {
   Accept: 'application/json',
@@ -8,7 +8,7 @@ const HEADERS = {
   'X-Requested-With': 'XMLHttpRequest' // make backwards compatible with rails "request.xhr?"
 };
 
-function getCsrfToken() {
+export function getCsrfToken() {
   const meta = document.querySelector('meta[name="csrf-token"]');
   return meta ? meta.getAttribute('content') : '';
 }
